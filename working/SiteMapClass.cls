@@ -43,7 +43,6 @@ Public Function Execute(CsvObject As Object, MainObject As Object, OptionString 
     Dim isEditing As Boolean
     Dim Controls As String
     Dim instanceId As String
-    Dim remote As RemoteClass
     '
     Set Csv = CsvObject
     Set Main = MainObject
@@ -51,12 +50,12 @@ Public Function Execute(CsvObject As Object, MainObject As Object, OptionString 
     ' update
     '
     If siteMapVersion > kmaEncodeInteger(Main.GetSiteProperty("SiteMap Version", "0")) Then
-        '
-        ' rename path to sitemapfiles because collision with link alias
-        '
-        Set remote = New RemoteClass
-        Call remote.ExecuteCmd("deletefolder", "folder=" & Main.physicalwwwpath & "sitemap")
-        Set remote = Nothing
+        ''
+        '' rename path to sitemapfiles because collision with link alias
+        ''
+        'Set remote = New RemoteClass
+        'Call remote.ExecuteCmd("deletefolder", "folder=" & Main.physicalwwwpath & "sitemap")
+        'Set remote = Nothing
         Call Main.SetSiteProperty("SiteMap Version", siteMapVersion)
     End If
     
@@ -242,7 +241,7 @@ End Function
 Private Function GetSectionBasedSiteMap(indexPageName As String, instanceId As String, isEditing As Boolean) As String
     On Error GoTo ErrorTrap
     '
-    Dim ptr As Long
+    Dim Ptr As Long
     Dim cnt As Long
     Dim sortMethods() As String
     Dim RootPageID As Long
@@ -293,9 +292,9 @@ Private Function GetSectionBasedSiteMap(indexPageName As String, instanceId As S
             sortMethods = Split(SortMethod, ",")
             SortMethod = ""
             cnt = UBound(sortMethods) + 1
-            For ptr = 0 To cnt - 1
-                If sortMethods(ptr) <> "" Then
-                    SortMethod = SortMethod & ",s." & sortMethods(ptr)
+            For Ptr = 0 To cnt - 1
+                If sortMethods(Ptr) <> "" Then
+                    SortMethod = SortMethod & ",s." & sortMethods(Ptr)
                 End If
             Next
             If SortMethod <> "" Then
